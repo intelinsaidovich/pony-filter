@@ -1,0 +1,78 @@
+{
+  "name": "pony-filter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.1.0",
+    "eslint": "^5.4.0",
+    "eslint-config-prettier": "^3.0.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.14.0",
+    "react-scripts": "1.1.4",
+    "stylelint": "^9.4.0",
+    "stylelint-config-idiomatic-order": "^5.0.0",
+    "stylelint-config-prettier": "^4.0.0",
+    "stylelint-config-standard": "^18.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "src/**/*.pcss": [
+      "prettier --write",
+      "stylelint --fix",
+      "git add"
+    ],
+    "src/**/*.js": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "trailingComma": "all",
+    "semi": false,
+    "printWidth": 100,
+    "jsxBracketSameLine": true,
+    "parser": "babylon"
+
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "prettier",
+      "prettier/react",
+      "react-app"
+    ],
+    "plugins": [],
+    "env": {
+      "browser": true
+    }
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-idiomatic-order",
+      "stylelint-config-prettier"
+    ],
+    "rules": {
+      "at-rule-no-unknown": [
+        true,
+        {
+          "ignoreAtRules": [
+            "for"
+          ]
+        }
+      ]
+    }
+  }
+}
