@@ -1,14 +1,13 @@
 import React from "react";
-// import * as styled from "./style";
 
-const Select = ({ name, options }) => (
-  <select name={name}>
-    {options &&
-      options.map(o => (
-        <option value={o.value} selected={o.selected}>
-          {o.text}
-        </option>
-      ))}
+const Select = ({ filter: { init, name, options }, changeHandle }) => (
+  <select name={name} onChange={changeHandle}>
+    <option>{init}</option>
+    {options.map((option, i) => (
+      <option value={option} key={i}>
+        {option}
+      </option>
+    ))}
   </select>
 );
 

@@ -1,5 +1,7 @@
 import * as api from "lib/api";
 
+import { filterActions } from "store/reducer";
+
 const STATE = {};
 
 const GET_DATA = "api/GET_DATA";
@@ -21,4 +23,7 @@ export const getInfo = () => async dispatch => {
     type: GET_DATA,
     data: { result }
   });
+  dispatch(filterActions.getOptions(result));
+
+  dispatch(filterActions.filter(result));
 };

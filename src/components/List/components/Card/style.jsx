@@ -5,6 +5,7 @@ export const Card = styled.div`
   flex-direction: column;
   border: 2px solid #eee;
   border-radius: 6px;
+  margin-bottom: 20px;
 `;
 
 export const Header = styled.div`

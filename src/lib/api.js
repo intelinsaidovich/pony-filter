@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const api = axios.create();
-const data = "https://api.myjson.com/bins/jzi3w";
+const url = "https://api.myjson.com/bins/o8bng";
 
-export const getInfo = query =>
+export const getInfo = () =>
   api
-    .get(data, { params: { query } })
+    .get(url)
     .then(r => r.data)
     .catch(r => ({ error: r.response }));

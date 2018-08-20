@@ -8,14 +8,17 @@ export const PageList = ({ size, clickHandler, currentPage }) => (
       .map((_, i) => {
         const pageNumber = i + 1;
         const active = currentPage === pageNumber;
+        const isVisible = size > 1;
 
-        return (
+        return isVisible ? (
           <styled.Item
+            key={pageNumber}
             active={active}
-            onClick={() => clickHandler(pageNumber)}>
+            onClick={() => clickHandler(pageNumber)}
+          >
             {pageNumber}
           </styled.Item>
-        );
+        ) : null;
       })}
   </styled.Items>
 );

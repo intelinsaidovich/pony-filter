@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import App from "./App";
+import List from "components/List/List";
 
 import configureStore from "store";
 const store = configureStore();
@@ -10,7 +10,7 @@ const store = configureStore();
 const render = () =>
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <List />
     </Provider>,
     document.getElementById("root")
   );

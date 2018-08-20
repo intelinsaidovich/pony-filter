@@ -28,7 +28,7 @@ export class List extends Component {
 
 export default connect(
   state => ({
-    data: state.api.result
+    data: state.filter.filteredData
   }),
   dispatch => ({
     apiActions: bindActionCreators(actions.apiActions, dispatch)

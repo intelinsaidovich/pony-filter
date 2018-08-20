@@ -33,12 +33,16 @@ export class Paginator extends Component {
       <Fragment>
         <div className="row">
           {currentPageItems.map(item => (
-            <div className="col-12 col-md-5 col-lg-4">
-              <Component data={item} price-type={"priceType"} />
+            <div className="col-12 col-md-5 col-lg-4" key={item.id}>
+              <Component data={item} />
             </div>
           ))}
         </div>
-        <PageList currentPage={currentPage} clickHandler={this._showPage} />
+        <PageList
+          size={pagesCount}
+          currentPage={currentPage}
+          clickHandler={this._showPage}
+        />
       </Fragment>
     );
   }
