@@ -14,7 +14,7 @@ export class Paginator extends Component {
     const { Component, data } = this.props;
     const { currentPage } = this.state;
 
-    const itemsOnPage = 5;
+    const itemsOnPage = 20;
     const pagesCount = Math.ceil(data.length / itemsOnPage);
 
     const slicedItems = [];

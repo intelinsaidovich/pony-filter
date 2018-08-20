@@ -16,6 +16,7 @@ export const Popup = styled.div`
 export const Inner = styled.div`
   position: absolute;
   min-width: 300px;
+  max-width: 960px;
   width: 80%
   left: 0;
   right: 0;
