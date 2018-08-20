@@ -20,9 +20,11 @@ export const Inner = styled.div`
   width: 80%
   left: 0;
   right: 0;
-  top: 25%;
-  bottom: 25%;
+  top: 50%;
   margin: auto;
   background: white;
-  padding: 20px;
+  padding: 25px 40px;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  box-shadow: 0 1px 15px 2px rgba(0, 0, 0, 0.35);
 `;

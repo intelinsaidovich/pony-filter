@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -16,7 +16,12 @@ export class List extends Component {
   render() {
     const items = this.props.data;
 
-    return items ? <Paginator data={items} Component={Card} /> : null;
+    if (!items) return "загрузка";
+
+    if (items.length === 0)
+      return "не найдено ни одного пони. Попробуйте поменять условия";
+
+    return <Paginator data={items} Component={Card} />;
   }
 }
 

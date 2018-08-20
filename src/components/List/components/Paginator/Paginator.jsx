@@ -25,14 +25,14 @@ export class Paginator extends Component {
       slicedItems.push({ pageNumber: i + 1, items: data.slice(start, end) });
     }
 
-    const { items: currentPageItems } = slicedItems.find(
+    const { items } = slicedItems.find(
       ({ pageNumber }) => pageNumber === currentPage
     );
 
     return (
       <Fragment>
         <div className="row">
-          {currentPageItems.map(item => (
+          {items.map(item => (
             <div className="col-12 col-md-6 col-lg-4" key={item.id}>
               <Component data={item} />
             </div>

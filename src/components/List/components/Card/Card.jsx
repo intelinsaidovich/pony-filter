@@ -19,12 +19,16 @@ export class Card extends Component {
     return (
       <styled.Card>
         <styled.Body>
+          <styled.Index>#{id}</styled.Index>
           <styled.Header>
-            {kind} - <styled.Name>{name}</styled.Name> (#{id})
+            <styled.Name>
+              {kind} <span>{name}</span>
+            </styled.Name>
+            <styled.Color data-color={color} style={{ background: hex }} />
           </styled.Header>
         </styled.Body>
-        <styled.Footer style={{ background: hex }}>
-          <div>{price} ₽</div>
+        <styled.Footer>
+          <styled.Price>{price} ₽</styled.Price>
           {is_new && <div>Новинка!</div>}
         </styled.Footer>
       </styled.Card>

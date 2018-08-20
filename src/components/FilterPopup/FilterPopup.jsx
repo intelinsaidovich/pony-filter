@@ -13,7 +13,8 @@ const linkText = modalRoot.textContent;
 
 class FilterPopup extends Component {
   state = {
-    open: false
+    open: false,
+    inputs: []
   };
 
   el = document.createElement("div");
@@ -27,7 +28,32 @@ class FilterPopup extends Component {
     modalRoot.removeChild(this.el);
   }
 
-  openPopup = () => {
+  changeHandle = f => {
+    const form = ReactDOM.findDOMNode(f);
+    const inputs = [];
+
+    for (let i = 0; i < form.length; i++) {
+      const self = form[i];
+      let { value, name, nodeName, type } = self;
+      const tag = nodeName.toLowerCase();
+
+      if (tag === "select") {
+        const index = self.options.selectedIndex;
+        value = index === 0 ? null : self.value;
+      }
+
+      if (type === "checkbox") {
+        value = self.checked ? true : false;
+      }
+
+      inputs.push({ value, name });
+    }
+
+    this.setState({ inputs });
+  };
+
+  openPopup = e => {
+    e.preventDefault();
     this.setState({ open: true });
   };
 
@@ -35,20 +61,30 @@ class FilterPopup extends Component {
     this.setState({ open: false });
   };
 
+  filter = () => {
+    const { filterActions } = this.props;
+    const { inputs } = this.state;
+    this.closePopup();
+    filterActions.filter(inputs);
+  };
+
   render() {
     const { filters, price, filterActions } = this.props;
     const { open } = this.state;
+
     return ReactDOM.createPortal(
       <Fragment>
-        <a onClick={this.openPopup}>{linkText}</a>
-        <Popup isVisible={open} close={this.closePopup}>
-          <Filter
-            changeHandle={this.changeHandle}
-            filters={filters}
-            price={price}
-            filterActions={filterActions}
-          />
-        </Popup>
+        <div onClick={this.openPopup}>{linkText}</div>
+        {open && (
+          <Popup close={this.closePopup} filter={this.filter}>
+            <Filter
+              changeHandle={this.changeHandle}
+              filters={filters}
+              price={price}
+              filterActions={filterActions}
+            />
+          </Popup>
+        )}
       </Fragment>,
       this.el
     );
