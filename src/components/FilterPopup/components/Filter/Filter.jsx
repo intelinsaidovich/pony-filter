@@ -25,16 +25,16 @@ export default class Form extends Component {
         </div>
 
         <div>
-          <Input
-            name="min"
-            placeholder={`от ${price.min}`}
-            changeHandle={this.changeHandle}
-          />
-          <Input
-            name="max"
-            placeholder={`до ${price.max}`}
-            changeHandle={this.changeHandle}
-          />
+          {price.map(p => {
+            const [name] = Object.keys(p);
+            return (
+              <Input
+                name={name}
+                placeholder={p[name]}
+                changeHandle={this.changeHandle}
+              />
+            );
+          })}
         </div>
         <div>
           <Checkbox

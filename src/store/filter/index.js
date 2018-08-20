@@ -52,10 +52,16 @@ export const getOptions = results => dispatch => {
     return { init, name, options };
   });
 
-  const price = results.map(item => item.price).reduce((a, b, index, self) => ({
-    min: Math.min(...self),
-    max: Math.max(...self)
-  }));
+  const min = results
+    .map(item => item.price)
+    .reduce((a, b, index, self) => Math.min(...self));
+
+  const price = results
+    .map(item => item.price)
+    .reduce((a, b, index, self) => [
+      { min: Math.min(...self) },
+      { max: Math.max(...self) }
+    ]);
 
   dispatch({
     type: GET_FILTER_OPTIONS,
