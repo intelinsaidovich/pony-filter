@@ -24,6 +24,5 @@ export const getInfo = () => async dispatch => {
     data: { result }
   });
   dispatch(filterActions.getOptions(result));
-
   dispatch(filterActions.filter(result));
 };

@@ -11,12 +11,10 @@ export const Card = styled.div`
 export const Header = styled.div`
   display: flex;
   margin-bottom: 13px;
+  flex-wrap: wrap;
 `;
 
 export const Body = styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
   padding: 32px 32px 22px;
 `;
 

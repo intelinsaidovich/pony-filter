@@ -33,7 +33,7 @@ export class Paginator extends Component {
       <Fragment>
         <div className="row">
           {currentPageItems.map(item => (
-            <div className="col-12 col-md-5 col-lg-4" key={item.id}>
+            <div className="col-12 col-md-6 col-lg-4" key={item.id}>
               <Component data={item} />
             </div>
           ))}

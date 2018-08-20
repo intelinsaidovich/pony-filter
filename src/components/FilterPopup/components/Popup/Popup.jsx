@@ -1,12 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
 import * as styled from "./style";
-const Popup = ({ isVisible, handleClose, children }) => {
+
+const Popup = ({ isVisible, close, children }) => {
   return isVisible ? (
     <styled.Popup>
       <styled.Inner>
         <h1>Фильтр пони</h1>
         {children}
-        <button onClick={handleClose}>close me</button>
+        <button onClick={close}>закрыть</button>
       </styled.Inner>
     </styled.Popup>
   ) : null;
