@@ -4,43 +4,48 @@ import Select from "./components/Select/Select.jsx";
 import Checkbox from "./components/Checkbox/Checkbox.jsx";
 import Input from "./components/Input/Input.jsx";
 
-export default class Form extends Component {
-  changeHandle = () => {
-    this.props.changeHandle(this);
-  };
-
-  componentDidMount() {
-    this.props.changeHandle(this);
-  }
-
+export default class Filter extends Component {
   render() {
-    const { filters, price } = this.props;
+    const { filters, price, changeHandle, inputs } = this.props;
+    const getValue = name => {
+      const o = inputs.find(input => input.name === name);
+      return o ? o.value : "";
+    };
 
     return filters ? (
       <form>
         <div>
-          {filters.map(filter => (
-            <Select changeHandle={this.changeHandle} filter={filter} />
+          {filters.map((filter, i) => (
+            <Select
+              key={i}
+              changeHandle={changeHandle}
+              value={getValue(filter.name)}
+              filter={filter}
+            />
           ))}
         </div>
 
         <div>
-          {price.map(p => {
+          {price.map((p, i) => {
             const [name] = Object.keys(p);
             return (
               <Input
+                key={i}
                 name={name}
                 placeholder={p[name]}
-                changeHandle={this.changeHandle}
+                changeHandle={changeHandle}
+                value={getValue(name)}
               />
             );
           })}
         </div>
+
         <div>
           <Checkbox
             text={"новинка"}
             name={"is_new"}
-            changeHandle={this.changeHandle}
+            checked={getValue("is_new")}
+            changeHandle={changeHandle}
           />
         </div>
       </form>
