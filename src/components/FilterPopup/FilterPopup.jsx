@@ -13,7 +13,7 @@ const linkText = modalRoot.textContent;
 
 class FilterPopup extends Component {
   state = {
-    open: false,
+    isOpen: false,
     inputs: []
   };
 
@@ -28,37 +28,23 @@ class FilterPopup extends Component {
     modalRoot.removeChild(this.el);
   }
 
-  changeHandle = f => {
-    const form = ReactDOM.findDOMNode(f);
-    const inputs = [];
+  changeHandle = (name, value) => {
+    const inputs = this.state.inputs;
+    const self = inputs.find(i => i.name === name);
+    const newInputs = self
+      ? inputs.map(input => (input.name === name ? { name, value } : input))
+      : [...inputs, { name, value }];
 
-    for (let i = 0; i < form.length; i++) {
-      const self = form[i];
-      let { value, name, nodeName, type } = self;
-      const tag = nodeName.toLowerCase();
-
-      if (tag === "select") {
-        const index = self.options.selectedIndex;
-        value = index === 0 ? null : self.value;
-      }
-
-      if (type === "checkbox") {
-        value = self.checked ? true : false;
-      }
-
-      inputs.push({ value, name });
-    }
-
-    this.setState({ inputs });
+    this.setState({ inputs: newInputs });
   };
 
   openPopup = e => {
     e.preventDefault();
-    this.setState({ open: true });
+    this.setState({ isOpen: true });
   };
 
   closePopup = () => {
-    this.setState({ open: false });
+    this.setState({ isOpen: false });
   };
 
   filter = () => {
@@ -70,16 +56,17 @@ class FilterPopup extends Component {
 
   render() {
     const { filters, price, filterActions } = this.props;
-    const { open } = this.state;
+    const { isOpen, inputs } = this.state;
 
     return ReactDOM.createPortal(
       <Fragment>
         <div onClick={this.openPopup}>{linkText}</div>
-        {open && (
+        {isOpen && (
           <Popup close={this.closePopup} filter={this.filter}>
             <Filter
               changeHandle={this.changeHandle}
               filters={filters}
+              inputs={inputs}
               price={price}
               filterActions={filterActions}
             />
